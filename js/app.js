@@ -57,4 +57,58 @@
   };
 
   // ADD YOUR CODE HERE
+
+
+  /*$("form").on("submit", function (e) {
+    e.preventDefault()
+    var inner = $("#search").val()
+    inner === "" ? alert("Fill something in"):
+    console.log(inner)
+
+    $.getJSON('http://www.omdbapi.com/?s=' + inner, function(data) {
+       let arr = data.Search;
+        console.log(arr[0].Title)
+       arr.map(x => {
+         var newObj = {}
+         newObj["title"] = x.Title;
+         newObj["id"] = x.imdbID;
+         newObj["year"] = x.Year;
+         newObj["poster"] = x.Poster;
+         movies.push(newObj)
+       })
+       renderMovies();
+      })
+       console.log(movies);
+
+  })*/
+
+  $("form").on("submit", function (e) {
+    e.preventDefault()
+    var inner = $("#search").val()
+    inner === "" ? alert("Fill something in"):
+    console.log(inner)
+
+    $.getJSON('http://www.omdbapi.com/?s=' + inner, function(data) {
+       let arr = data.Search;
+       arr.map(x => {
+         var newObj = {}
+         newObj["title"] = x.Title;
+         newObj["id"] = x.imdbID;
+         newObj["year"] = x.Year;
+         newObj["poster"] = x.Poster;
+         $.getJSON('http://www.omdbapi.com/?i=' + newObj["id"], function(dataID) {
+           newObj["plot"] = dataID.Plot
+           movies.push(newObj)
+           renderMovies();
+         })
+       })
+      })
+  })
+
+
+
+
+
+
+
 })();
