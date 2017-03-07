@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const movies = [];
+  var movies = [];
 
   const renderMovies = function() {
     $('#listings').empty();
@@ -59,34 +59,12 @@
   // ADD YOUR CODE HERE
 
 
-  /*$("form").on("submit", function (e) {
+  $("form").on("submit", function(e) {
     e.preventDefault()
+    movies = []
     var inner = $("#search").val()
     inner === "" ? alert("Fill something in"):
-    console.log(inner)
-
-    $.getJSON('http://www.omdbapi.com/?s=' + inner, function(data) {
-       let arr = data.Search;
-        console.log(arr[0].Title)
-       arr.map(x => {
-         var newObj = {}
-         newObj["title"] = x.Title;
-         newObj["id"] = x.imdbID;
-         newObj["year"] = x.Year;
-         newObj["poster"] = x.Poster;
-         movies.push(newObj)
-       })
-       renderMovies();
-      })
-       console.log(movies);
-
-  })*/
-
-  $("form").on("submit", function (e) {
-    e.preventDefault()
-    var inner = $("#search").val()
-    inner === "" ? alert("Fill something in"):
-    console.log(inner)
+    $("form").trigger("reset")
 
     $.getJSON('http://www.omdbapi.com/?s=' + inner, function(data) {
        let arr = data.Search;
@@ -103,12 +81,7 @@
          })
        })
       })
+
   })
-
-
-
-
-
-
 
 })();
